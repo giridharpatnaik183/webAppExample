@@ -2,6 +2,10 @@
 <html>
 <head>
     <title>My Website</title>
+<style>
+
+</style>
+
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
