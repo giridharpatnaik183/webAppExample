@@ -21,7 +21,7 @@
     </nav>
     <main>
         <section>
-            <h2>About Me</h2>
+            <h2>About Aishwarya</h2>
             <p>Hello, I am a web developer.</p>
             <p>This is Assignment-4</p>
             <p>Assignment-4 completed</p>
