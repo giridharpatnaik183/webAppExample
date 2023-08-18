@@ -14,7 +14,7 @@
     <nav>
         <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="#about.jsp">About</a></li>
+            <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="#">Customers</a></li>
             <li><a href="#">Service</a></li>
