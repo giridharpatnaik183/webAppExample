@@ -35,9 +35,13 @@ pipeline {
             steps {
                 script {
                     def targetDir = "${TOMCAT_WEBAPPS}/ROOT"
-                    def sourceJspPath = "src/main/webapp/index.jsp"
+                    def sourceJspPath = "https://raw.githubusercontent.com/giridharpatnaik183/webAppExample/master/src/main/webapp/index.jsp"
 
-                    sh "cp ${sourceJspPath} ${targetDir}/"
+                    if (env.BRANCH_NAME == 'qa') {
+                        sourceJspPath = "https://raw.githubusercontent.com/giridharpatnaik183/webAppExample/qa/src/main/webapp/index.jsp"
+                    }
+
+                    sh "curl -o ${targetDir}/index.jsp ${sourceJspPath}"
                 }
             }
         }
