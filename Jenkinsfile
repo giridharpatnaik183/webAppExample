@@ -5,6 +5,10 @@ pipeline {
         maven 'maven'
     }
     
+    environment {
+        TOMCAT_WEBAPPS = '/var/lib/tomcat9/webapps' // Set this to the actual path of the Tomcat webapps directory
+    }
+    
     stages {
         stage('SCM Checkout') {
             steps {
@@ -24,21 +28,25 @@ pipeline {
             }
         }
         
-        stage('Deploy Index.html for Master') {
+        stage('Deploy Index.html') {
             when {
-                expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') && env.BRANCH_NAME == 'master' }
+                expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
             }
             steps {
-                sh 'cp path/to/master/index.html path/to/tomcat/webapps/ROOT/'
-            }
-        }
-        
-        stage('Deploy Index.html for QA') {
-            when {
-                expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') && env.BRANCH_NAME == 'qa' }
-            }
-            steps {
-                sh 'cp path/to/qa/index.html path/to/tomcat/webapps/ROOT/'
+                script {
+                    def targetDir = "${TOMCAT_WEBAPPS}/ROOT"
+                    def sourceHtmlPath = ""
+
+                    if (env.BRANCH_NAME == 'master') {
+                        sourceHtmlPath = 'master/index.html'
+                    } else if (env.BRANCH_NAME == 'qa') {
+                        sourceHtmlPath = 'qa/index.html'
+                    } else {
+                        error("Unsupported branch: ${env.BRANCH_NAME}")
+                    }
+
+                    sh "cp ${sourceHtmlPath} ${targetDir}/"
+                }
             }
         }
     }
