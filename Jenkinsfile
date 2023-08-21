@@ -28,24 +28,24 @@ pipeline {
             }
         }
         
-        stage('Deploy Index.html') {
+        stage('Deploy index.jsp') {
             when {
                 expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
             }
             steps {
                 script {
                     def targetDir = "${TOMCAT_WEBAPPS}/ROOT"
-                    def sourceHtmlPath = ""
+                    def sourceJspPath = ""
 
                     if (env.BRANCH_NAME == 'master') {
-                        sourceHtmlPath = 'master/index.html'
+                        sourceJspPath = 'webAppExample/src/main/webapp/master/index.jsp'
                     } else if (env.BRANCH_NAME == 'qa') {
-                        sourceHtmlPath = 'qa/index.html'
+                        sourceJspPath = 'webAppExample/src/main/webapp/qa/index.jsp'
                     } else {
                         error("Unsupported branch: ${env.BRANCH_NAME}")
                     }
 
-                    sh "cp ${sourceHtmlPath} ${targetDir}/"
+                    sh "cp ${sourceJspPath} ${targetDir}/"
                 }
             }
         }
