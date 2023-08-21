@@ -9,7 +9,7 @@ tools{
 	stage('SCM Checkout'){
 
 	steps{
-	git branch: 'master', url: 'https://github.com/aishwaryasomashekar/webAppExample.git'
+	git branch: 'master', url: 'https://github.com/giridharpatnaik183/webAppExample.git'
 	}
 	} 
 stage('Build'){
@@ -20,7 +20,7 @@ stage('Build'){
 	} 
 stage ('Deploy to Tomcat Server'){
 			steps{
-				deploy adapters: [tomcat9(credentialsId: 'abd0586d-0f34-4d69-bc82-b1b9194bc521', path: '', url: 'http://13.236.84.153:8090/')], contextPath: 'webAppExample', war: '**/*.war'
+				deploy adapters: [tomcat9(credentialsId: '058ddaec-e159-4481-b9e6-801f583943b6', path: '', url: 'http://18.234.157.123:8090/')], contextPath: null, war: '**/*.war'
 			}
 
 		}
