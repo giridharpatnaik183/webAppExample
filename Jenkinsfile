@@ -35,15 +35,7 @@ pipeline {
             steps {
                 script {
                     def targetDir = "${TOMCAT_WEBAPPS}/ROOT"
-                    def sourceJspPath = ""
-
-                    if (env.BRANCH_NAME == 'master') {
-                        sourceJspPath = 'webAppExample/src/main/webapp/master/index.jsp'
-                    } else if (env.BRANCH_NAME == 'qa') {
-                        sourceJspPath = 'webAppExample/src/main/webapp/qa/index.jsp'
-                    } else {
-                        error("Unsupported branch: ${env.BRANCH_NAME}")
-                    }
+                    def sourceJspPath = "src/main/webapp/index.jsp"
 
                     sh "cp ${sourceJspPath} ${targetDir}/"
                 }
