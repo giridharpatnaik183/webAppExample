@@ -1,37 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Website</title>
-
-
-
-    <link rel="stylesheet" type="text/css" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smartphone Sales Application</title>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Website</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Customers</a></li>
-            <li><a href="#">Service</a></li>
-            <li><a href="#">Feedback</a></li>
-            
-        </ul>
-    </nav>
-    <main>
-        <section>
-            <h2>About Aishwarya</h2>
-            <p>Hello, I am a web developer.</p>
-            <p>This is Assignment-4</p>
-            <p>Assignment-4 completed</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 My Website. All rights reserved.</p>
-    </footer>
+  <h1>Smartphone Sales Application</h1>
+  <form action="submit_order.php" method="post">
+    <label for="model">Select Smartphone Model:</label>
+    <select name="model" id="model">
+      <option value="iphone">iPhone</option>
+      <option value="samsung">Samsung Galaxy</option>
+      <option value="google">Google Pixel</option>
+      <option value="oneplus">OnePlus</option>
+    </select>
+    <br>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required>
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+    <br>
+    <label for="address">Shipping Address:</label>
+    <textarea name="address" id="address" rows="4" required></textarea>
+    <br>
+    <button type="submit">Submit Order</button>
+  </form>
 </body>
 </html>
