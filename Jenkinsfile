@@ -29,7 +29,12 @@ pipeline {
         stage('Deploy to Tomcat Server') {
             steps {
                 script {
-                    def targetDir = "${TOMCAT_WEBAPPS}/${BRANCH}"
+                    def targetDir
+                    if (env.BRANCH_NAME == 'master') {
+                        targetDir = "${TOMCAT_WEBAPPS}/master"
+                    } else if (env.BRANCH_NAME == 'qa') {
+                        targetDir = "${TOMCAT_WEBAPPS}/qa"
+                    }
                     sshCommand remote: TOMCAT_SERVER, userSshKey: [$class: 'StringBinding', variable: 'SSH_CREDENTIALS'], command: "mkdir -p ${targetDir} && cp -f target/*.war ${targetDir}/"
                 }
             }
@@ -47,10 +52,13 @@ pipeline {
             }
             steps {
                 script {
-                    def targetDir = "${TOMCAT_WEBAPPS}/ROOT"
-                    def sourceJspPath = "https://raw.githubusercontent.com/giridharpatnaik183/webAppExample/master/src/main/webapp/index.jsp"
-
-                    if (env.BRANCH_NAME == 'qa') {
+                    def targetDir
+                    def sourceJspPath
+                    if (env.BRANCH_NAME == 'master') {
+                        targetDir = "${TOMCAT_WEBAPPS}/ROOT"
+                        sourceJspPath = "https://raw.githubusercontent.com/giridharpatnaik183/webAppExample/master/src/main/webapp/index.jsp"
+                    } else if (env.BRANCH_NAME == 'qa') {
+                        targetDir = "${TOMCAT_WEBAPPS}/qa"
                         sourceJspPath = "https://raw.githubusercontent.com/giridharpatnaik183/webAppExample/qa/src/main/webapp/index.jsp"
                     }
 
