@@ -9,6 +9,8 @@ pipeline {
         TOMCAT_WEBAPPS = '/var/lib/tomcat9/webapps' // Set this to the actual path of the Tomcat webapps directory
         SSH_CREDENTIALS = 'my_ssh_credentials'
         TOMCAT_SERVER = '54.89.78.184'
+        TOMCAT_CREDENTIALS_ID = '058ddaec-e159-4481-b9e6-801f583943b6'
+        TOMCAT_URL = 'http://54.89.78.184:8090/'
     }
 
     stages {
@@ -30,6 +32,12 @@ pipeline {
                     def targetDir = "${TOMCAT_WEBAPPS}/${BRANCH}"
                     sshCommand remote: TOMCAT_SERVER, userSshKey: [$class: 'StringBinding', variable: 'SSH_CREDENTIALS'], command: "mkdir -p ${targetDir} && cp -f target/*.war ${targetDir}/"
                 }
+            }
+        }
+
+        stage('Deploy to Tomcat via Plugin') {
+            steps {
+                deploy adapters: [tomcat9(credentialsId: TOMCAT_CREDENTIALS_ID, path: '', url: TOMCAT_URL)], contextPath: null, war: '**/*.war'
             }
         }
 
