@@ -38,7 +38,7 @@ pipeline {
                     def sourceJspPath = "https://raw.githubusercontent.com/giridharpatnaik183/webAppExample/master/src/main/webapp/index.jsp"
 
                     if (env.BRANCH_NAME == 'qa') {
-                        sourceJspPath = "https://raw.githubusercontent.com/giridharpatnaik183/webAppExample1/qa/src/main/webapp/index.jsp"
+                        sourceJspPath = "https://raw.githubusercontent.com/giridharpatnaik183/webAppExample/qa/src/main/webapp/index.jsp"
                     }
 
                     sh "curl -o ${targetDir}/index.jsp ${sourceJspPath}"
