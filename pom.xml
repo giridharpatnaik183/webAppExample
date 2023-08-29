@@ -53,9 +53,5 @@
 			
 			
 		</plugins>
-		<plugins>
-    <!-- Other plugins -->
-</plugins>
-
 	</build>
 </project>
