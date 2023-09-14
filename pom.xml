@@ -54,4 +54,12 @@
 			
 		</plugins>
 	</build>
+	<properties>
+    <sonar.login>squ_5e5bfc95a196ed51487af70fcff5fc2c26e19cb0</sonar.login>
+</properties>
+<properties>
+    <sonar.login>admin</sonar.login>
+    <sonar.password>sonar</sonar.password>
+</properties>
+
 </project>
